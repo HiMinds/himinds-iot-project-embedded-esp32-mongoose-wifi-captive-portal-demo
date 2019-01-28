@@ -1,0 +1,41 @@
+author: Suru Dissanaike
+description: Mongoose OS Wifi Captive Portal Demo
+version: 1.0
+
+libs_version: ${mos.version}
+modules_version: ${mos.version}
+mongoose_os_version: ${mos.version}
+
+filesystem:
+  - fs
+
+config_schema:
+  - ["pins", "o", {title: "Pins layout"}]
+  - ["pins.button_pull_up", "b", true, {title: "True if button is pulled up when inactive"}]
+  - ["pins.led", "i", 5, {title: "LED GPIO pin"}]
+  - [ "portal.wifi.enable", "b", true, {title: "Enable WiFi captive portal on device boot"}]
+  - [ "portal.wifi.rpc", "b", true, {title: "Enable Captive Portal RPC Endpoint regardless of whether captive portal is enabled/started"}]
+  - [ "portal.wifi.gzip", "b", true, {title: "Whether or not to serve gzip HTML file (set to false to serve standard HTML for dev)"}]
+  - [ "portal.wifi.hostname", "s", "setup.device.portal", {title: "Hostname to use for captive portal redirect"}]
+  - [ "portal.wifi.copy", "b", true, {title: "Copy SSID and Password to wifi.sta after succesful test"}]
+  - [ "portal.wifi.disable", "i", 0, {title: "0 - do nothing, 1 - Disable AP (wifi.ap.enable), 2 - Disable AP and Captive Portal (portal.wifi.enable) -- after successful test and copy/save values"}]
+  - [ "portal.wifi.reboot", "i", 15, {title: "0 to disable, or value (in seconds) to wait and then reboot device, after successful test (and copy/save values)"}]
+
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/core
+  - origin: https://github.com/mongoose-os-libs/rpc-service-config
+  - origin: https://github.com/mongoose-os-libs/rpc-service-fs
+  - origin: https://github.com/mongoose-os-libs/rpc-uart
+  - origin: https://github.com/mongoose-os-libs/rpc-common
+  - origin: https://github.com/mongoose-os-libs/wifi
+  - origin: https://github.com/mongoose-os-libs/mjs
+  - origin: https://github.com/mongoose-os-libs/rpc-service-wifi
+  - origin: https://github.com/tripflex/wifi-captive-portal
+
+
+tags:
+  - c
+  - wifi
+
+manifest_version: 2017-05-18
